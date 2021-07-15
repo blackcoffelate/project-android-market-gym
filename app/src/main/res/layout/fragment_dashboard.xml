@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".admin.FragmentDashboard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/greeting_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_default_half_night" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="25dp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/fullname_admin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Fullname"
+                        android:textColor="@color/blue"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|start"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/greeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Selamat Siang"
+                            android:textColor="@color/blue"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/greeting_icon"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_marginStart="10dp"
+                            android:src="@drawable/ic_day_icon"
+                            android:tint="@color/blue" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="0"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/users" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#4B2CC1" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="25dp"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient"
+                app:cardCornerRadius="5dp"
+                app:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="00"
+                            android:textColor="@color/blue"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start|bottom"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:src="@drawable/ic_store_mall_directory_black_24dp"
+                                android:tint="@color/green" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Produk"
+                                android:textColor="@color/green"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/green" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient"
+                app:cardCornerRadius="5dp"
+                android:layout_marginStart="15dp"
+                app:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="00"
+                            android:textColor="@color/blue"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start|bottom"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:src="@drawable/ic_shopping_cart_black_24dp"
+                                android:tint="@color/red" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Keranjang"
+                                android:textColor="@color/red"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/red" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                app:cardCornerRadius="5dp"
+                app:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="00"
+                            android:textColor="@color/blue"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start|bottom"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:src="@drawable/ic_sentiment_satisfied_black_24dp"
+                                android:tint="@color/blue" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Customer"
+                                android:textColor="@color/blue"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="25dp"
+        android:paddingBottom="10dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|start">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_developer_board_black_24dp"
+                android:tint="#BDB8B8" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="List produk"
+                android:textColor="@color/blue"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end|center">
+
+            <TextView
+                android:id="@+id/view_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:text="Lihat semua"
+                android:textColor="#BDB8B8"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/empty_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:padding="25dp"
+        android:visibility="visible"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/empty_data" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/data_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:visibility="gone"
+        tools:itemCount="2"
+        tools:listitem="@layout/layout_data_admin" />
+
+</LinearLayout>

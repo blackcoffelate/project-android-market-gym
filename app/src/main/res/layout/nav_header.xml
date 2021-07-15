@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/blue"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/photo_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/users"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2dp"
+        app:civ_circle_background_color="@color/white"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fullname_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/lorem_title"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/phone_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="@string/phone"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

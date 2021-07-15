@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Sekawan</string>
+    <string name="app_name_caps">SEKAWAN</string>
+    <string name="instansi">Toko Sekawan</string>
+
+    <string name="signin">Masuk</string>
+    <string name="signup">Pendaftaran</string>
+    <string name="back">Kembali</string>
+    <string name="next">Selanjutnya</string>
+    <string name="skip">Lewati</string>
+
+    <string name="lorem_title">Lorem Ipsum</string>
+    <string name="lorem_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="welcome">Selamat datang</string>
+    <string name="sign_in_desc">Masukan data diri anda dengan benar.</string>
+
+    <string name="uname">Username ...</string>
+    <string name="pass">Password ...</string>
+    <string name="fullname">Nama Lengkap ...</string>
+    <string name="phone">Nomor Telephone ...</string>
+    <string name="address">Alamat Lengkap ...</string>
+    <string name="new_users">Pengguna baru ? Buat Akun Disini !</string>
+    <string name="come_users">Sudah Memiliki Akun ? Silahkan Masuk !</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="loading">Mohon tunggu sebentar...</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="submit">Submit</string>
+    <string name="deskripsi">Deskripsi ...</string>
+    <string name="stok">Stok ...</string>
+    <string name="harga">Harga ...</string>
+    <string name="nama_barang">Nama barang ...</string>
+
+</resources>

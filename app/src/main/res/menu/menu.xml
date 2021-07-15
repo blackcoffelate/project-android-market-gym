@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dashboard"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:iconTint="@color/white"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/store"
+            android:icon="@drawable/ic_store_mall_directory_black_24dp"
+            android:iconTint="@color/white"
+            android:title="Produk" />
+    </group>
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/profile"
+                    android:icon="@drawable/ic_fingerprint_black_24dp"
+                    android:iconTint="@color/white"
+                    android:title="Profile" />
+                <item
+                    android:id="@+id/signout"
+                    android:icon="@drawable/ic_sentiment_dissatisfied_black_24dp"
+                    android:iconTint="@color/white"
+                    android:title="Sign Out" />
+            </group>
+        </menu>
+    </item>
+</menu>
