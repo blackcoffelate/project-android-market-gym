@@ -109,15 +109,15 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/empty_store"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center|top"
-                    android:padding="25dp"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/empty_data" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/empty_store"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center|top"
+            android:padding="25dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty_data" />
 
     </FrameLayout>
 

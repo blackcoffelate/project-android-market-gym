@@ -11,7 +11,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
@@ -46,7 +45,6 @@ public class FragmentStore extends Fragment implements SwipeRefreshLayout.OnRefr
     private FloatingActionButton addProduct;
     private LottieAnimationView animationView;
     private SwipeRefreshLayout swipeRefreshLayoutStore;
-    private LinearLayout emptyData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
