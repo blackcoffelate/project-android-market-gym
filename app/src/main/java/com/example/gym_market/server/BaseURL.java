@@ -10,5 +10,6 @@ public class BaseURL {
     public static String add_store = baseUrl + "barangs/addbarang";
     public static String get_store = baseUrl + "barangs/getall";
     public static String get_store_by_id = baseUrl + "barangs/getbyid/";
+    public static String delete_store_by_id = baseUrl + "barangs/deletebyid/";
 
 }

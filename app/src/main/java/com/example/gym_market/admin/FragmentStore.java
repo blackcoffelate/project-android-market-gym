@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
@@ -43,7 +44,7 @@ public class FragmentStore extends Fragment implements SwipeRefreshLayout.OnRefr
     private RequestQueue mRequestQueue;
 
     private FloatingActionButton addProduct;
-    private LottieAnimationView animationView;
+    private LinearLayout animationView;
     private SwipeRefreshLayout swipeRefreshLayoutStore;
 
     @Override
@@ -70,7 +71,7 @@ public class FragmentStore extends Fragment implements SwipeRefreshLayout.OnRefr
         modelStores = new ArrayList<>();
         recyclerViewStoreAdapter = new AdapterStore(getActivity(), modelStores);
 
-        functionCheckStore();
+//        functionCheckStore();
 
         swipeRefreshLayoutStore.setOnRefreshListener(this);
         swipeRefreshLayoutStore.post(new Runnable() {
@@ -120,8 +121,10 @@ public class FragmentStore extends Fragment implements SwipeRefreshLayout.OnRefr
                                         dataStore.setFotoBarang(fotobarang);
                                         dataStore.set_id(_id);
 
+//                                        modelStores.clear();
                                         modelStores.add(dataStore);
                                         recyclerViewStore.setAdapter(recyclerViewStoreAdapter);
+                                        recyclerViewStoreAdapter.notifyDataSetChanged();
                                     }
                                     animationView.setVisibility(View.GONE);
                                     recyclerViewStore.setVisibility(View.VISIBLE);

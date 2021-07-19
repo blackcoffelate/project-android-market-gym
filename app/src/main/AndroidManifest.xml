@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".admin.AllDataStore"></activity>
+        <activity android:name=".DetailData"></activity>
+        <activity android:name=".admin.AllDataStore" />
 
         <uses-library
             android:name="org.apache.http.legacy"

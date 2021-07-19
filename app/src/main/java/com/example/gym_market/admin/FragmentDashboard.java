@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -44,7 +45,7 @@ public class FragmentDashboard extends Fragment {
 
     private TextView greetingDay, fullnameAdmin, viewAll;
     private ImageView greetingImg, greetingIcon;
-    private LottieAnimationView animationView;
+    private LinearLayout animationView;
 
     ModelUser modelUser;
 
@@ -105,32 +106,30 @@ public class FragmentDashboard extends Fragment {
                             boolean statusMsg = response.getBoolean("status");
                             if (statusMsg == true) {
                                 String toko = response.getString("result");
-                                if (toko.isEmpty()) {
-                                    animationView.setVisibility(View.VISIBLE);
-                                    recyclerViewDashboard.setVisibility(View.GONE);
-                                }else {
-                                    JSONArray jsonArray = new JSONArray(toko);
-                                    for (int i = 0; i < jsonArray.length(); i++) {
-                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                        final ModelStore dataStore = new ModelStore();
-                                        final String _id = jsonObject.getString("_id");
-                                        final String namabarang = jsonObject.getString("namaBarang");
-                                        final String deskripsibarang = jsonObject.getString("deskripsiBarang");
-                                        final String hargabarang = jsonObject.getString("hargaBarang");
-                                        final String stokbarang = jsonObject.getString("stokBarang");
-                                        final String fotobarang = jsonObject.getString("fotoBarang");
-                                        dataStore.setNamaBarang(namabarang);
-                                        dataStore.setHargaBrang(hargabarang);
-                                        dataStore.setStokBarang(stokbarang);
-                                        dataStore.setDeskripsiBarang(deskripsibarang);
-                                        dataStore.setFotoBarang(fotobarang);
-                                        dataStore.set_id(_id);
-                                        modelDashboard.add(dataStore);
-                                        recyclerViewDashboard.setAdapter(recyclerViewDashboardAdapter);
-                                    }
-                                    animationView.setVisibility(View.GONE);
-                                    recyclerViewDashboard.setVisibility(View.VISIBLE);
+                                JSONArray jsonArray = new JSONArray(toko);
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    final ModelStore dataStore = new ModelStore();
+                                    final String _id = jsonObject.getString("_id");
+                                    final String namabarang = jsonObject.getString("namaBarang");
+                                    final String deskripsibarang = jsonObject.getString("deskripsiBarang");
+                                    final String hargabarang = jsonObject.getString("hargaBarang");
+                                    final String stokbarang = jsonObject.getString("stokBarang");
+                                    final String fotobarang = jsonObject.getString("fotoBarang");
+                                    dataStore.setNamaBarang(namabarang);
+                                    dataStore.setHargaBrang(hargabarang);
+                                    dataStore.setStokBarang(stokbarang);
+                                    dataStore.setDeskripsiBarang(deskripsibarang);
+                                    dataStore.setFotoBarang(fotobarang);
+                                    dataStore.set_id(_id);
+                                    modelDashboard.add(dataStore);
+                                    recyclerViewDashboard.setAdapter(recyclerViewDashboardAdapter);
                                 }
+                                animationView.setVisibility(View.GONE);
+                                recyclerViewDashboard.setVisibility(View.VISIBLE);
+                            } else {
+                                animationView.setVisibility(View.VISIBLE);
+                                recyclerViewDashboard.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

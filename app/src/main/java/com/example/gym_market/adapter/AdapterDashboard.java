@@ -33,7 +33,7 @@ public class AdapterDashboard extends RecyclerView.Adapter<AdapterDashboard.View
     @Override
     public AdapterDashboard.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.layout_data_admin, null);
+        View v = inflater.inflate(R.layout.layout_data_default, null);
         return new ViewHolder(v);
     }
 
@@ -45,12 +45,14 @@ public class AdapterDashboard extends RecyclerView.Adapter<AdapterDashboard.View
         holder.namaBarang.setText(store.getNamaBarang());
         holder.stokBarang.setText(store.getStokBarang());
         holder.hargaBarang.setText(store.getHargaBrang());
+//        holder.deskripsiBarang.setText(store.getDeskripsiBarang());
+        holder.textDeskripsi = store.getDeskripsiBarang();
 
-        holder.deskripsiBarang.setText(store.getDeskripsiBarang());
-
-        if (holder.deskripsiBarang.length() > 30) {
+        if (holder.textDeskripsi.length() > 30) {
             holder.textDeskripsi = holder.textDeskripsi.substring(0, 30) + "...";
             holder.deskripsiBarang.setText(holder.textDeskripsi);
+        }else {
+            holder.deskripsiBarang.setText(store.getDeskripsiBarang());
         }
 
     }

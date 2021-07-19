@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
@@ -18,6 +19,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gym_market.R;
+import com.example.gym_market.adapter.AdapterDashboard;
 import com.example.gym_market.adapter.AdapterStore;
 import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.server.BaseURL;
@@ -29,7 +31,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllDataStore extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class AllDataStore extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerViewAllDataStore;
     RecyclerView.Adapter recyclerViewAllDataStoreAdapter;
@@ -37,7 +39,7 @@ public class AllDataStore extends AppCompatActivity implements SwipeRefreshLayou
 
     private RequestQueue mRequestQueue;
 
-    private LottieAnimationView animationView;
+    private LinearLayout animationView;
     private ImageView backArrow;
     private SwipeRefreshLayout swipeRefreshLayoutStore;
 
@@ -56,9 +58,9 @@ public class AllDataStore extends AppCompatActivity implements SwipeRefreshLayou
         recyclerViewAllDataStore.setHasFixedSize(true);
         recyclerViewAllDataStore.setLayoutManager(new GridLayoutManager(this, 2));
         modelStores = new ArrayList<>();
-        recyclerViewAllDataStoreAdapter = new AdapterStore(this, modelStores);
+        recyclerViewAllDataStoreAdapter = new AdapterDashboard(this, modelStores);
 
-        functionCheckStore();
+//        functionCheckStore();
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,34 +93,35 @@ public class AllDataStore extends AppCompatActivity implements SwipeRefreshLayou
                             boolean statusMsg = response.getBoolean("status");
                             if (statusMsg == true) {
                                 String toko = response.getString("result");
-                                if (toko.isEmpty()) {
-                                    animationView.setVisibility(View.VISIBLE);
-                                    recyclerViewAllDataStore.setVisibility(View.GONE);
-                                    swipeRefreshLayoutStore.setRefreshing(false);
-                                } else {
-                                    JSONArray jsonArray = new JSONArray(toko);
-                                    for (int i = 0; i < jsonArray.length(); i++) {
-                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                        final ModelStore dataStore = new ModelStore();
-                                        final String _id = jsonObject.getString("_id");
-                                        final String namabarang = jsonObject.getString("namaBarang");
-                                        final String deskripsibarang = jsonObject.getString("deskripsiBarang");
-                                        final String hargabarang = jsonObject.getString("hargaBarang");
-                                        final String stokbarang = jsonObject.getString("stokBarang");
-                                        final String fotobarang = jsonObject.getString("fotoBarang");
-                                        dataStore.setNamaBarang(namabarang);
-                                        dataStore.setHargaBrang(hargabarang);
-                                        dataStore.setStokBarang(stokbarang);
-                                        dataStore.setDeskripsiBarang(deskripsibarang);
-                                        dataStore.setFotoBarang(fotobarang);
-                                        dataStore.set_id(_id);
+                                JSONArray jsonArray = new JSONArray(toko);
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    final ModelStore dataStore = new ModelStore();
+                                    final String _id = jsonObject.getString("_id");
+                                    final String namabarang = jsonObject.getString("namaBarang");
+                                    final String deskripsibarang = jsonObject.getString("deskripsiBarang");
+                                    final String hargabarang = jsonObject.getString("hargaBarang");
+                                    final String stokbarang = jsonObject.getString("stokBarang");
+                                    final String fotobarang = jsonObject.getString("fotoBarang");
+                                    dataStore.setNamaBarang(namabarang);
+                                    dataStore.setHargaBrang(hargabarang);
+                                    dataStore.setStokBarang(stokbarang);
+                                    dataStore.setDeskripsiBarang(deskripsibarang);
+                                    dataStore.setFotoBarang(fotobarang);
+                                    dataStore.set_id(_id);
 
-                                        modelStores.add(dataStore);
-                                        recyclerViewAllDataStore.setAdapter(recyclerViewAllDataStoreAdapter);
-                                    }
-                                    animationView.setVisibility(View.GONE);
-                                    recyclerViewAllDataStore.setVisibility(View.VISIBLE);
+//                                    modelStores.clear();
+                                    modelStores.add(dataStore);
+                                    recyclerViewAllDataStore.setAdapter(recyclerViewAllDataStoreAdapter);
+                                    recyclerViewAllDataStoreAdapter.notifyDataSetChanged();
                                 }
+                                animationView.setVisibility(View.GONE);
+                                recyclerViewAllDataStore.setVisibility(View.VISIBLE);
+
+                            } else {
+                                animationView.setVisibility(View.VISIBLE);
+                                recyclerViewAllDataStore.setVisibility(View.GONE);
+                                swipeRefreshLayoutStore.setRefreshing(false);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
