@@ -144,7 +144,6 @@ public class ProductAdd extends AppCompatActivity {
     private void functionAddItemStore(final String dataNamaBarang, final String dataHargaBarang, final String dataStokBarang, final String dataDeskripsiBarang, final Bitmap bitmap) {
         progressDialog.setTitle("Mohon tunggu sebentar...");
         showDialog();
-//        Log.d("data", String.valueOf(bitmap));
         VolleyMultipart volleyMultipartRequest = new VolleyMultipart(Request.Method.POST, BaseURL.add_store,
                 new Response.Listener<NetworkResponse>() {
                     @Override

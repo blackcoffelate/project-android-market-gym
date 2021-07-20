@@ -80,7 +80,7 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.ViewHolder> 
         holder.editData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, DetailData.class).putExtra("fotoBarang", store.getFotoBarang()));
+                context.startActivity(new Intent(context, DetailData.class).putExtra("fotoBarang", store.getFotoBarang()).putExtra("namaBarang", store.getNamaBarang()).putExtra("hargaBarang", store.getHargaBrang()).putExtra("deskripsiBarang", store.getDeskripsiBarang()).putExtra("stokBarang", store.getStokBarang()).putExtra("_id", store.get_id()));
             }
         });
 
