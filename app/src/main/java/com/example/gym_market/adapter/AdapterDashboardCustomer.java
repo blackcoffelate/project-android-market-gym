@@ -1,6 +1,7 @@
 package com.example.gym_market.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,40 +13,41 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gym_market.R;
+import com.example.gym_market.customer.DetailBarang;
 import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.server.BaseURL;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AdapterDashboard extends RecyclerView.Adapter<AdapterDashboard.ViewHolder> {
+public class AdapterDashboardCustomer extends RecyclerView.Adapter<AdapterDashboardCustomer.ViewHolder> {
 
     private Context context;
     private List<ModelStore> storeList;
     private final int limit = 4;
 
-    public AdapterDashboard(Context context, List<ModelStore> storeList) {
+    public AdapterDashboardCustomer(Context context, List<ModelStore> storeList) {
         this.context = context;
         this.storeList = storeList;
     }
 
     @NonNull
     @Override
-    public AdapterDashboard.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterDashboardCustomer.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.layout_data_default, null);
+        View v = inflater.inflate(R.layout.layout_data_default_customer, null);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ModelStore store = storeList.get(position);
+        final ModelStore store = storeList.get(position);
 
         Picasso.get().load(BaseURL.baseUrl + store.getFotoBarang()).resize(500, 400).centerCrop().into(holder.fotoBarang);
         holder.namaBarang.setText(store.getNamaBarang());
         holder.stokBarang.setText("STOK - " + store.getStokBarang());
         holder.hargaBarang.setText(store.getHargaBrang());
-//        holder.deskripsiBarang.setText(store.getDeskripsiBarang());
+        holder.deskripsiBarang.setText(store.getDeskripsiBarang());
         holder.textDeskripsi = store.getDeskripsiBarang();
 
         if (holder.textDeskripsi.length() > 30) {
@@ -54,6 +56,13 @@ public class AdapterDashboard extends RecyclerView.Adapter<AdapterDashboard.View
         }else {
             holder.deskripsiBarang.setText(store.getDeskripsiBarang());
         }
+
+        holder.cardBarang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, DetailBarang.class).putExtra("_id", store.get_id()).putExtra("namaBarang", store.getNamaBarang()).putExtra("hargaBarang", store.getHargaBrang()).putExtra("stokBarang", store.getStokBarang()).putExtra("deskripsiBarang", store.getDeskripsiBarang()).putExtra("fotoBarang", store.getFotoBarang()));
+            }
+        });
 
     }
 

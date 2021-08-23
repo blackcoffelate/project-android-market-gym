@@ -23,7 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailData"></activity>
+        <activity android:name=".customer.DetailBarangAll"></activity>
+        <activity android:name=".customer.AllDataStoreCustomer" />
+        <activity android:name=".customer.DetailBarang" />
+        <activity android:name=".DetailData" />
         <activity android:name=".admin.AllDataStore" />
 
         <uses-library
@@ -63,7 +66,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
     </application>
 
 </manifest>

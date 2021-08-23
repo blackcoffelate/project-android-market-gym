@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dashboard"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:iconTint="@color/white"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/store"
+            android:icon="@drawable/ic_store_mall_directory_black_24dp"
+            android:iconTint="@color/white"
+            android:title="Produk" />
+        <item
+            android:id="@+id/keranjang"
+            android:icon="@drawable/ic_shopping_basket_black_24dp"
+            android:iconTint="@color/white"
+            android:title="Keranjang" />
+        <item
+            android:id="@+id/pesanan"
+            android:icon="@drawable/ic_payment_black_24dp"
+            android:iconTint="@color/white"
+            android:title="Pesanan" />
+        <item
+            android:id="@+id/daftarpesanan"
+            android:icon="@drawable/ic_art_track_black_24dp"
+            android:iconTint="@color/white"
+            android:title="Daftar Pesanan" />
+    </group>
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/profile"
+                    android:icon="@drawable/ic_fingerprint_black_24dp"
+                    android:iconTint="@color/white"
+                    android:title="Profile" />
+                <item
+                    android:id="@+id/signout"
+                    android:icon="@drawable/ic_sentiment_dissatisfied_black_24dp"
+                    android:iconTint="@color/white"
+                    android:title="Sign Out" />
+            </group>
+        </menu>
+    </item>
+</menu>

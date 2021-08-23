@@ -3,6 +3,7 @@
     <string name="app_name_caps">SEKAWAN</string>
     <string name="instansi">Toko Sekawan</string>
     <string name="instansi_desc">Pedagang eceran kecuali untuk kendaraan bermotor. Menjual secara eceran semua jenis barang olah raga.</string>
+    <string name="customer_desc">Jadilah pelanggan tetap di toko kami, kami menjamin pelayanan dengan kualitas terbaik.</string>
 
     <string name="signin">Masuk</string>
     <string name="signup">Pendaftaran</string>

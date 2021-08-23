@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Nama Barang"
-                        android:textSize="16sp"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -109,7 +109,7 @@
                     <TextView
                         android:id="@+id/stok_barang"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="18dp"
                         android:background="@drawable/button_yellow"
                         android:gravity="center"
                         android:paddingLeft="10dp"
@@ -118,7 +118,7 @@
                         android:paddingBottom="2dp"
                         android:text="000"
                         android:textColor="@color/blue"
-                        android:textSize="12sp"
+                        android:textSize="9sp"
                         android:textStyle="bold" />
 
                     <LinearLayout

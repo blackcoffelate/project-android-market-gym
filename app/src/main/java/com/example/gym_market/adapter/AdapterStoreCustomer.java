@@ -1,6 +1,5 @@
 package com.example.gym_market.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -26,7 +24,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gym_market.DetailData;
 import com.example.gym_market.R;
-import com.example.gym_market.admin.FragmentStore;
+import com.example.gym_market.customer.DetailBarang;
+import com.example.gym_market.customer.DetailBarangAll;
 import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.server.BaseURL;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
@@ -37,22 +36,22 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class AdapterStore extends RecyclerView.Adapter<AdapterStore.ViewHolder> {
+public class AdapterStoreCustomer extends RecyclerView.Adapter<AdapterStoreCustomer.ViewHolder> {
 
     private Context context;
     private List<ModelStore> storeList;
     private RequestQueue mRequestQueue;
 
-    public AdapterStore(Context context, List<ModelStore> storeList) {
+    public AdapterStoreCustomer(Context context, List<ModelStore> storeList) {
         this.context = context;
         this.storeList = storeList;
     }
 
     @NonNull
     @Override
-    public AdapterStore.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterStoreCustomer.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.layout_data_admin, null);
+        View v = inflater.inflate(R.layout.layout_data_dashboard_customer, null);
         mRequestQueue = Volley.newRequestQueue(context);
         return new ViewHolder(v);
     }
@@ -75,35 +74,10 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.ViewHolder> 
             holder.deskripsiBarang.setText(store.getDeskripsiBarang());
         }
 
-        holder.idData = store.get_id();
-
-        holder.editData.setOnClickListener(new View.OnClickListener() {
+        holder.cardBarang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, DetailData.class).putExtra("fotoBarang", store.getFotoBarang()).putExtra("namaBarang", store.getNamaBarang()).putExtra("hargaBarang", store.getHargaBrang()).putExtra("deskripsiBarang", store.getDeskripsiBarang()).putExtra("stokBarang", store.getStokBarang()).putExtra("_id", store.get_id()));
-            }
-        });
-
-        holder.deleteData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Hapus data");
-                builder.setMessage("Apakah anda yakin menghapus data ini ?");
-                builder.setPositiveButton("YA", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                       deleteDataBarang(holder.idData);
-                    }
-                });
-                builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                context.startActivity(new Intent(context, DetailBarangAll.class).putExtra("_id", store.get_id()).putExtra("namaBarang", store.getNamaBarang()).putExtra("hargaBarang", store.getHargaBrang()).putExtra("stokBarang", store.getStokBarang()).putExtra("deskripsiBarang", store.getDeskripsiBarang()).putExtra("fotoBarang", store.getFotoBarang()));
             }
         });
 
@@ -136,29 +110,5 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.ViewHolder> 
             stokBarang = itemView.findViewById(R.id.stok_barang);
             hargaBarang = itemView.findViewById(R.id.harga_barang);
         }
-    }
-
-    private void deleteDataBarang(String idData) {
-        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.DELETE, BaseURL.delete_store_by_id + idData, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println("response = " + response);
-                        try {
-                            boolean statusMsg = response.getBoolean("status");
-                            if (statusMsg == true) {
-                                StyleableToast.makeText(context, "Data berhasil dihapus", R.style.toastStyleSuccess).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
-            }
-        });
-        mRequestQueue.add(req);
     }
 }
