@@ -63,7 +63,7 @@ public class AdapterStore extends RecyclerView.Adapter<AdapterStore.ViewHolder> 
 
         Picasso.get().load(BaseURL.baseUrl + store.getFotoBarang()).resize(500, 400).centerCrop().into(holder.fotoBarang);
         holder.namaBarang.setText(store.getNamaBarang());
-        holder.stokBarang.setText("STOK - " + store.getStokBarang());
+        holder.stokBarang.setText(store.getStokBarang());
         holder.hargaBarang.setText(store.getHargaBrang());
 
         holder.textDeskripsi = store.getDeskripsiBarang();

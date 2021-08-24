@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,22 +22,25 @@ import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.server.BaseURL;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterStoreCustomer extends RecyclerView.Adapter<AdapterStoreCustomer.ViewHolder> {
+public class FilterAdapterStoreCustomer extends RecyclerView.Adapter<FilterAdapterStoreCustomer.ViewHolder> {
 
     Context context;
     List<ModelStore> storeList;
+    List<ModelStore> filteredUserDataList;
     RequestQueue mRequestQueue;
 
-    public AdapterStoreCustomer(Context context, List<ModelStore> storeList) {
+    public FilterAdapterStoreCustomer(Context context, List<ModelStore> storeList) {
         this.context = context;
         this.storeList = storeList;
+        this.filteredUserDataList = storeList;
     }
 
     @NonNull
     @Override
-    public AdapterStoreCustomer.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FilterAdapterStoreCustomer.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.layout_data_dashboard_customer, null);
         mRequestQueue = Volley.newRequestQueue(context);
@@ -72,7 +76,36 @@ public class AdapterStoreCustomer extends RecyclerView.Adapter<AdapterStoreCusto
 
     @Override
     public int getItemCount() {
-        return storeList.size();
+        return filteredUserDataList.size();
+    }
+
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String key = charSequence.toString();
+                if (key.isEmpty()){
+                    filteredUserDataList = storeList;
+                }else {
+                    List<ModelStore> listFilterData = new ArrayList<>();
+                    for (ModelStore row: storeList){
+                        if (row.getNamaBarang().toLowerCase().contains(key.toLowerCase())){
+                            listFilterData.add(row);
+                        }
+                    }
+                    filteredUserDataList = listFilterData;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredUserDataList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredUserDataList = (List<ModelStore>)filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

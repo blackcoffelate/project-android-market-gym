@@ -64,10 +64,11 @@ public class MainCustomer extends AppCompatActivity {
                         loadFragment(new FragmentStoreCustomer());
                         break;
                     case R.id.keranjang:
-                        loadFragment(new FragmentProfileCustomer());
+                        loadFragment(new FragmentKeranjangCustomer());
                         break;
                     case R.id.pesanan:
-                        loadFragment(new FragmentPesananCustomer());
+                        startActivity(new Intent(MainCustomer.this, PesananCustomer.class));
+//                        Animatoo.animateSlideLeft(MainCustomer.this);
                         break;
                     case R.id.daftarpesanan:
                         loadFragment(new FragmentDaftarPesanan());

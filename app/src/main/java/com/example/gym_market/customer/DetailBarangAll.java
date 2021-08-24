@@ -1,6 +1,8 @@
 package com.example.gym_market.customer;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,15 +12,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -28,7 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.gym_market.R;
 import com.example.gym_market.adapter.AdapterDashboardCustomer;
 import com.example.gym_market.model.ModelStore;
@@ -46,11 +50,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,11 +71,13 @@ public class DetailBarangAll extends AppCompatActivity {
     Button addCart;
     ImageView fotoBarangD;
     TextView namaBarangD, hargaBarangD, stokBarangD, deskripsiBarangD;
-    String idBarangShow, namaBarangShow, deskripsiBarangShow, hargabarangShow, stokBarangShow, fotoBarangShow, _idBarang, _idPembeli;
+    int dataQty;
+    String idBarangShow, namaBarangShow, deskripsiBarangShow, hargabarangShow, stokBarangShow, fotoBarangShow, _idBarang, _idPembeli, kuantitasBarang, totalKuantitas;
     Bitmap bitmap;
     String mCurrentPhotoPath;
+    ElegantNumberButton addQty;
 
-    private int time_milis = 1000;
+    private int time_milis = 1500;
     private final int CameraR_PP = 1;
 
     @Override
@@ -102,6 +105,7 @@ public class DetailBarangAll extends AppCompatActivity {
         deskripsiBarangD = findViewById(R.id.deskripsi_barang);
         fotoBarangD = findViewById(R.id.foto_barang);
         addCart = findViewById(R.id.add_barang);
+        addQty = findViewById(R.id.kuantiti);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_pembeli);
         setSupportActionBar(toolbar);
@@ -126,7 +130,7 @@ public class DetailBarangAll extends AppCompatActivity {
 
             namaBarangD.setText(namaBarangShow);
             hargaBarangD.setText(hargabarangShow);
-            stokBarangD.setText("STOK - " + stokBarangShow);
+            stokBarangD.setText(stokBarangShow);
             deskripsiBarangD.setText(deskripsiBarangShow);
             String photoTokoData = fotoBarangShow;
             _idBarang = idBarangShow;
@@ -139,6 +143,18 @@ public class DetailBarangAll extends AppCompatActivity {
 
             getSupportActionBar().setTitle(namaBarangShow);
         }
+
+        int rangeBarang = Integer.parseInt(stokBarangShow);
+        addQty.setRange(0, rangeBarang);
+        addQty.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kuantitasBarang = addQty.getNumber();
+                dataQty = Integer.parseInt(kuantitasBarang);
+            }
+        });
+
+        totalKuantitas = String.valueOf(dataQty);
 
         modelUser = (ModelUser) GsonHelper.parseGson(App.getPref().getString(Prefs.PREF_STORE_PROFILE, ""), new ModelUser());
         _idPembeli = modelUser.get_id();
@@ -156,27 +172,27 @@ public class DetailBarangAll extends AppCompatActivity {
     private void functionAddBarang(final Bitmap bitmap) {
         progressDialog.setTitle("Mohon tunggu sebentar...");
         showDialog();
-        VolleyMultipart volleyMultipartRequest = new VolleyMultipart(Request.Method.POST, BaseURL.add_cart,
+
+        VolleyMultipart volleyMultipart = new VolleyMultipart(Request.Method.POST, BaseURL.add_cart,
                 new Response.Listener<NetworkResponse>() {
                     @Override
                     public void onResponse(NetworkResponse response) {
-                        System.out.println("DATA KITA" + response);
                         mRequestQueue.getCache().clear();
+                        System.out.println("DATA KITA" + _idPembeli);
                         hideDialog();
                         try {
                             JSONObject jsonObject = new JSONObject(new String(response.data));
-                            System.out.println("res = " + jsonObject.toString());
                             String strMsg = jsonObject.getString("message");
                             boolean status = jsonObject.getBoolean("status");
                             if (status == true) {
                                 showDialogSuccess();
-//                                Handler handler = new Handler();
-//                                handler.postDelayed(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        hideDialogSuccess();
-//                                    }
-//                                }, time_milis);
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        hideDialogSuccess();
+                                    }
+                                }, time_milis);
                             } else {
                                 StyleableToast.makeText(getApplicationContext(), strMsg, R.style.toastStyleWarning).show();
                             }
@@ -189,11 +205,20 @@ public class DetailBarangAll extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         hideDialog();
-                        StyleableToast.makeText(DetailBarangAll.this, error.getMessage(), R.style.toastStyleWarning).show();
+                        StyleableToast.makeText(getApplicationContext(), error.getMessage(), R.style.toastStyleWarning).show();
                     }
-                }) {
+                }){
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, DataPart> getByteData() throws AuthFailureError {
+                Map<String, VolleyMultipart.DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+                params.put("fotoBarang", new VolleyMultipart.DataPart(imagename + ".jpg", getFileDataFromDrawable(bitmap)));
+                return params;
+            }
+
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("idPembeli", _idPembeli);
                 params.put("idBarang", _idBarang);
@@ -201,25 +226,17 @@ public class DetailBarangAll extends AppCompatActivity {
                 params.put("deskripsiBarang", deskripsiBarangD.getText().toString());
                 params.put("hargaBarang", hargaBarangD.getText().toString());
                 params.put("stokBarang", stokBarangD.getText().toString());
+                params.put("qty", kuantitasBarang);
                 return params;
             }
-
-//            @Override
-//            protected Map<String, DataPart> getByteData() {
-//                Map<String, DataPart> params = new HashMap<>();
-//                long imagename = System.currentTimeMillis();
-//                params.put("fotoBarang", new VolleyMultipart.DataPart(imagename + ".jpg", getFileDataFromDrawable(bitmap)));
-//                return params;
-//            }
         };
 
-//        volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        mRequestQueue = Volley.newRequestQueue(DetailBarangAll.this);
-//        mRequestQueue.add(volleyMultipartRequest);
-        mRequestQueue.add(volleyMultipartRequest);
+        volleyMultipart.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue = Volley.newRequestQueue(DetailBarangAll.this);
+        mRequestQueue.add(volleyMultipart);
     }
 
     @Override
@@ -280,8 +297,6 @@ public class DetailBarangAll extends AppCompatActivity {
                                     dataStore.setDeskripsiBarang(deskripsibarang);
                                     dataStore.setFotoBarang(fotobarang);
                                     dataStore.set_id(_id);
-
-//                                    modelStores.clear();
                                     modelStores.add(dataStore);
                                     recyclerViewAllDataStore.setAdapter(recyclerViewAllDataStoreAdapter);
                                     recyclerViewAllDataStoreAdapter.notifyDataSetChanged();

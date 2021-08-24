@@ -15,67 +15,26 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="10dp">
 
-                <ImageView
-                    android:id="@+id/foto_barang"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/background_header" />
+                <CheckBox
+                    android:id="@+id/checkbox_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox_style"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:scaleX="1"
+                    android:scaleY="1" />
 
-                <LinearLayout
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <LinearLayout
-                        android:id="@+id/edit_data"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#80000000">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:src="@drawable/ic_edit"
-                            android:tint="@color/white" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/white_transparent" />
-
-                    <LinearLayout
-                        android:id="@+id/delete_data"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#80000000">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="9dp"
-                            android:src="@drawable/ic_delete"
-                            android:tint="@color/white" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </FrameLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -84,18 +43,40 @@
                 android:padding="10dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
                     <TextView
                         android:id="@+id/nama_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
                         android:text="Nama Barang"
-                        android:textSize="13sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="0"
+                        android:background="@drawable/button_yellow"
+                        android:gravity="end"
+                        android:orientation="horizontal"
+                        android:paddingBottom="2dp">
+
+                        <ImageButton
+                            android:id="@+id/delete_item"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_delete_sweep_black_24dp"
+                            android:background="@android:color/transparent"
+                            android:tint="@color/white" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -109,7 +90,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/button_yellow"
+                        android:background="@drawable/button_blue"
                         android:orientation="horizontal"
                         android:paddingLeft="10dp"
                         android:paddingTop="2dp"
@@ -120,19 +101,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:gravity="center"
-                            android:text="STOK - "
-                            android:textColor="@color/blue"
-                            android:textSize="9sp"
+                            android:text="Jumlah Beli - "
+                            android:textColor="@color/yellow"
+                            android:textSize="10sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/stok_barang"
+                            android:id="@+id/qty_barang"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:gravity="center"
-                            android:text="000"
-                            android:textColor="@color/blue"
-                            android:textSize="9sp"
+                            android:text="1"
+                            android:textColor="@color/yellow"
+                            android:textSize="10sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -150,7 +131,7 @@
                             android:layout_marginStart="15dp"
                             android:gravity="center"
                             android:text="IDR"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -160,7 +141,7 @@
                             android:layout_marginStart="5dp"
                             android:gravity="center"
                             android:text="0000000"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -173,6 +154,13 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="#FDF8F8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi Barang"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/deskripsi_barang"

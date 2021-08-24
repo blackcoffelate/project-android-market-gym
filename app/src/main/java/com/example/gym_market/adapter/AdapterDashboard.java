@@ -43,7 +43,7 @@ public class AdapterDashboard extends RecyclerView.Adapter<AdapterDashboard.View
 
         Picasso.get().load(BaseURL.baseUrl + store.getFotoBarang()).resize(500, 400).centerCrop().into(holder.fotoBarang);
         holder.namaBarang.setText(store.getNamaBarang());
-        holder.stokBarang.setText("STOK - " + store.getStokBarang());
+        holder.stokBarang.setText(store.getStokBarang());
         holder.hargaBarang.setText(store.getHargaBrang());
 //        holder.deskripsiBarang.setText(store.getDeskripsiBarang());
         holder.textDeskripsi = store.getDeskripsiBarang();

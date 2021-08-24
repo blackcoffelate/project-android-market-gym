@@ -109,8 +109,6 @@ public class AllDataStore extends AppCompatActivity implements SwipeRefreshLayou
                                     dataStore.setDeskripsiBarang(deskripsibarang);
                                     dataStore.setFotoBarang(fotobarang);
                                     dataStore.set_id(_id);
-
-//                                    modelStores.clear();
                                     modelStores.add(dataStore);
                                     recyclerViewAllDataStore.setAdapter(recyclerViewAllDataStoreAdapter);
                                     recyclerViewAllDataStoreAdapter.notifyDataSetChanged();

@@ -1,12 +1,19 @@
 package com.example.gym_market.customer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -20,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.gym_market.R;
 import com.example.gym_market.adapter.AdapterDashboard;
 import com.example.gym_market.adapter.AdapterStoreCustomer;
+import com.example.gym_market.adapter.FilterAdapterStoreCustomer;
 import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.server.BaseURL;
 
@@ -33,14 +41,17 @@ import java.util.List;
 public class AllDataStoreCustomer extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerViewAllDataStore;
-    RecyclerView.Adapter recyclerViewAllDataStoreAdapter;
+//    RecyclerView.Adapter recyclerViewAllDataStoreAdapter;
     List<ModelStore> modelStores;
+    FilterAdapterStoreCustomer recyclerViewAllDataStoreAdapterFilter;
 
     private RequestQueue mRequestQueue;
 
     private LinearLayout animationView;
     private ImageView backArrow;
     private SwipeRefreshLayout swipeRefreshLayoutStore;
+    EditText searchView;
+    CharSequence search = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +64,12 @@ public class AllDataStoreCustomer extends AppCompatActivity implements SwipeRefr
         backArrow = findViewById(R.id.back_arrow);
         recyclerViewAllDataStore = findViewById(R.id.data_all_data_customer);
         swipeRefreshLayoutStore = findViewById(R.id.refresh_all_data_customer);
+        searchView = findViewById(R.id.search_item);
 
         recyclerViewAllDataStore.setHasFixedSize(true);
         recyclerViewAllDataStore.setLayoutManager(new GridLayoutManager(this, 2));
         modelStores = new ArrayList<>();
-        recyclerViewAllDataStoreAdapter = new AdapterStoreCustomer(this, modelStores);
+        recyclerViewAllDataStoreAdapterFilter = new FilterAdapterStoreCustomer(this, modelStores);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +84,26 @@ public class AllDataStoreCustomer extends AppCompatActivity implements SwipeRefr
             public void run() {
                 swipeRefreshLayoutStore.setRefreshing(true);
                 modelStores.clear();
-                recyclerViewAllDataStoreAdapter.notifyDataSetChanged();
+                recyclerViewAllDataStoreAdapterFilter.notifyDataSetChanged();
                 functionCheckStore();
+            }
+        });
+
+        searchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                recyclerViewAllDataStoreAdapterFilter.getFilter().filter(charSequence);
+                search = charSequence;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -105,11 +135,9 @@ public class AllDataStoreCustomer extends AppCompatActivity implements SwipeRefr
                                     dataStore.setDeskripsiBarang(deskripsibarang);
                                     dataStore.setFotoBarang(fotobarang);
                                     dataStore.set_id(_id);
-
-//                                    modelStores.clear();
                                     modelStores.add(dataStore);
-                                    recyclerViewAllDataStore.setAdapter(recyclerViewAllDataStoreAdapter);
-                                    recyclerViewAllDataStoreAdapter.notifyDataSetChanged();
+                                    recyclerViewAllDataStore.setAdapter(recyclerViewAllDataStoreAdapterFilter);
+                                    recyclerViewAllDataStoreAdapterFilter.notifyDataSetChanged();
                                 }
                                 animationView.setVisibility(View.GONE);
                                 recyclerViewAllDataStore.setVisibility(View.VISIBLE);
@@ -136,7 +164,8 @@ public class AllDataStoreCustomer extends AppCompatActivity implements SwipeRefr
     @Override
     public void onRefresh() {
         modelStores.clear();
-        recyclerViewAllDataStoreAdapter.notifyDataSetChanged();
+        recyclerViewAllDataStoreAdapterFilter.notifyDataSetChanged();
         functionCheckStore();
     }
+
 }

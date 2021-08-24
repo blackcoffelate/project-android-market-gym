@@ -33,8 +33,6 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final AdapterCustomer.ViewHolder holder, int position) {
         final ModelUser customer = customerList.get(position);
-
-//        Picasso.get().load(BaseURL.baseUrl + store.getFotoBarang()).resize(500, 400).centerCrop().into(holder.fotoBarang);
         holder.fullnameCustomer.setText(customer.getFullname());
     }
 

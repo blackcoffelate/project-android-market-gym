@@ -14,6 +14,10 @@ public class BaseURL {
     public static String update_store_by_id = baseUrl + "barangs/update/";
 
     public static String add_cart = baseUrl + "transaksi/addkeranjang";
+    public static String get_cart = baseUrl + "transaksi/getkeranjang/";
+    public static String delete_cart = baseUrl + "transaksi/keranjang/";
+
+    public static String checkout = baseUrl + "transaksi/checkout";
 
     public static String get_users = baseUrl + "users/getusers/";
 

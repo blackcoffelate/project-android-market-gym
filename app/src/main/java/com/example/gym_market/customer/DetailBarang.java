@@ -1,20 +1,25 @@
 package com.example.gym_market.customer;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -24,13 +29,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.gym_market.R;
-import com.example.gym_market.adapter.AdapterDashboard;
 import com.example.gym_market.adapter.AdapterDashboardCustomer;
 import com.example.gym_market.model.ModelStore;
+import com.example.gym_market.model.ModelUser;
 import com.example.gym_market.server.BaseURL;
 import com.example.gym_market.server.VolleyMultipart;
+import com.example.gym_market.utils.App;
+import com.example.gym_market.utils.GsonHelper;
+import com.example.gym_market.utils.Prefs;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.squareup.picasso.Picasso;
 
@@ -38,6 +46,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +58,7 @@ public class DetailBarang extends AppCompatActivity {
     RecyclerView recyclerViewAllDataStore;
     RecyclerView.Adapter recyclerViewAllDataStoreAdapter;
     List<ModelStore> modelStores;
+    ModelUser modelUser;
 
     private RequestQueue mRequestQueue;
 
@@ -57,9 +68,14 @@ public class DetailBarang extends AppCompatActivity {
     Button addCart;
     ImageView fotoBarangD;
     TextView namaBarangD, hargaBarangD, stokBarangD, deskripsiBarangD;
-    String idBarangShow, namaBarangShow, deskripsiBarangShow, hargabarangShow, stokBarangShow, fotoBarangShow;
+    int dataQty;
+    String idBarangShow, namaBarangShow, deskripsiBarangShow, hargabarangShow, stokBarangShow, fotoBarangShow, _idBarang, _idPembeli, kuantitasBarang, totalKuantitas;
+    Bitmap bitmap;
+    String mCurrentPhotoPath;
+    ElegantNumberButton addQty;
 
-    private int time_milis = 1000;
+    private int time_milis = 1500;
+    private final int CameraR_PP = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +102,7 @@ public class DetailBarang extends AppCompatActivity {
         deskripsiBarangD = findViewById(R.id.deskripsi_barang);
         fotoBarangD = findViewById(R.id.foto_barang);
         addCart = findViewById(R.id.add_barang);
+        addQty = findViewById(R.id.kuantiti);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_pembeli);
         setSupportActionBar(toolbar);
@@ -110,9 +127,10 @@ public class DetailBarang extends AppCompatActivity {
 
             namaBarangD.setText(namaBarangShow);
             hargaBarangD.setText(hargabarangShow);
-            stokBarangD.setText("STOK - " + stokBarangShow);
+            stokBarangD.setText(stokBarangShow);
             deskripsiBarangD.setText(deskripsiBarangShow);
             String photoTokoData = fotoBarangShow;
+            _idBarang = idBarangShow;
 
             if (photoTokoData == null) {
                 fotoBarangD.setImageResource(R.drawable.gym);
@@ -123,26 +141,41 @@ public class DetailBarang extends AppCompatActivity {
             getSupportActionBar().setTitle(namaBarangShow);
         }
 
+        int rangeBarang = Integer.parseInt(stokBarangShow);
+        addQty.setRange(0, rangeBarang);
+        addQty.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kuantitasBarang = addQty.getNumber();
+                dataQty = Integer.parseInt(kuantitasBarang);
+            }
+        });
+
+        totalKuantitas = String.valueOf(dataQty);
+
+        modelUser = (ModelUser) GsonHelper.parseGson(App.getPref().getString(Prefs.PREF_STORE_PROFILE, ""), new ModelUser());
+        _idPembeli = modelUser.get_id();
+
         functionCheckStore();
 
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                functionAddBarang();
+                functionAddBarang(bitmap);
             }
         });
 
     }
 
-    private void functionAddBarang() {
+    private void functionAddBarang(final Bitmap bitmap) {
         progressDialog.setTitle("Mohon tunggu sebentar...");
         showDialog();
-
         VolleyMultipart volleyMultipartRequest = new VolleyMultipart(Request.Method.POST, BaseURL.add_cart,
                 new Response.Listener<NetworkResponse>() {
                     @Override
                     public void onResponse(NetworkResponse response) {
                         mRequestQueue.getCache().clear();
+                        System.out.println("DATA QTY" + kuantitasBarang);
                         hideDialog();
                         try {
                             JSONObject jsonObject = new JSONObject(new String(response.data));
@@ -174,13 +207,24 @@ public class DetailBarang extends AppCompatActivity {
                     }
                 }) {
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, DataPart> getByteData() throws AuthFailureError {
+                Map<String, VolleyMultipart.DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+                params.put("fotoBarang", new VolleyMultipart.DataPart(imagename + ".jpg", getFileDataFromDrawable(bitmap)));
+                return params;
+            }
+
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("_id", idBarangShow);
+                params.put("idPembeli", _idPembeli);
+                params.put("idBarang", _idBarang);
                 params.put("namaBarang", namaBarangD.getText().toString());
                 params.put("deskripsiBarang", deskripsiBarangD.getText().toString());
                 params.put("hargaBarang", hargaBarangD.getText().toString());
                 params.put("stokBarang", stokBarangD.getText().toString());
+                params.put("qty", kuantitasBarang);
                 return params;
             }
         };
@@ -191,6 +235,38 @@ public class DetailBarang extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue = Volley.newRequestQueue(DetailBarang.this);
         mRequestQueue.add(volleyMultipartRequest);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == this.RESULT_CANCELED) {
+            return;
+        }
+
+        if (requestCode == CameraR_PP) {
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
+                fotoBarangD.setImageBitmap(bitmap);
+                if (fotoBarangD.getDrawable() != null) {
+                    fotoBarangD.requestLayout();
+                    fotoBarangD.setScaleType(ImageView.ScaleType.FIT_XY);
+                    ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) fotoBarangD.getLayoutParams();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                StyleableToast.makeText(this, "Terjadi kesalahan...", R.style.toastStyleWarning).show();
+            }
+        }
+    }
+
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        if (bitmap != null) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+        }
+        return byteArrayOutputStream.toByteArray();
     }
 
     private void functionCheckStore() {
@@ -219,8 +295,6 @@ public class DetailBarang extends AppCompatActivity {
                                     dataStore.setDeskripsiBarang(deskripsibarang);
                                     dataStore.setFotoBarang(fotobarang);
                                     dataStore.set_id(_id);
-
-//                                    modelStores.clear();
                                     modelStores.add(dataStore);
                                     recyclerViewAllDataStore.setAdapter(recyclerViewAllDataStoreAdapter);
                                     recyclerViewAllDataStoreAdapter.notifyDataSetChanged();
