@@ -87,7 +87,6 @@ public class FragmentProfile extends Fragment {
                                     final ModelUser dataCustomer = new ModelUser();
                                     final String _id = jsonObject.getString("_id");
                                     final String fullnameCustomer = jsonObject.getString("fullname");
-//                                        final String fotobarang = jsonObject.getString("fotoBarang");
                                     dataCustomer.setFullname(fullnameCustomer);
                                     dataCustomer.set_id(_id);
 

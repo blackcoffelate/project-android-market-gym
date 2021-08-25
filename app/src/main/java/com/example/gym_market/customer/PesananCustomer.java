@@ -11,13 +11,10 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.example.gym_market.R;
-import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.model.ModelUser;
 import com.example.gym_market.utils.App;
 import com.example.gym_market.utils.GsonHelper;
 import com.example.gym_market.utils.Prefs;
-
-import java.util.List;
 
 public class PesananCustomer extends AppCompatActivity {
 

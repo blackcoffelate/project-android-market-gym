@@ -1,6 +1,5 @@
 package com.example.gym_market.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,7 +7,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,7 +29,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gym_market.R;
 import com.example.gym_market.customer.FragmentKeranjangCustomer;
-import com.example.gym_market.customer.MainCustomer;
 import com.example.gym_market.model.ModelKeranjang;
 import com.example.gym_market.server.BaseURL;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
@@ -51,7 +47,7 @@ public class AdapterKeranjangCustomer extends RecyclerView.Adapter<AdapterKeranj
     private HashMap<Integer, Boolean> isChecked = new HashMap<>();
     int totalPrice;
     int grandTotalPrice = 0;
-    String grandD, namabarang, namabarangD, hargabarang, hargabarangD, deskripsibarang, deskripsibarangD, qtybarang, qtybarangD, idbarang, idbarangD;
+    String grandD, namabarang, hargabarang, deskripsibarang, qtybarang, idbarang;
 
     public AdapterKeranjangCustomer(Context context, List<ModelKeranjang> keranjangList) {
         this.context = context;

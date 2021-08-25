@@ -45,7 +45,6 @@ public class AdapterDashboard extends RecyclerView.Adapter<AdapterDashboard.View
         holder.namaBarang.setText(store.getNamaBarang());
         holder.stokBarang.setText(store.getStokBarang());
         holder.hargaBarang.setText(store.getHargaBrang());
-//        holder.deskripsiBarang.setText(store.getDeskripsiBarang());
         holder.textDeskripsi = store.getDeskripsiBarang();
 
         if (holder.textDeskripsi.length() > 30) {

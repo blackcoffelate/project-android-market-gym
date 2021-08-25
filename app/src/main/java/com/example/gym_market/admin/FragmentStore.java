@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -71,8 +70,6 @@ public class FragmentStore extends Fragment implements SwipeRefreshLayout.OnRefr
         modelStores = new ArrayList<>();
         recyclerViewStoreAdapter = new AdapterStore(getActivity(), modelStores);
 
-//        functionCheckStore();
-
         swipeRefreshLayoutStore.setOnRefreshListener(this);
         swipeRefreshLayoutStore.post(new Runnable() {
             @Override
@@ -120,8 +117,6 @@ public class FragmentStore extends Fragment implements SwipeRefreshLayout.OnRefr
                                         dataStore.setDeskripsiBarang(deskripsibarang);
                                         dataStore.setFotoBarang(fotobarang);
                                         dataStore.set_id(_id);
-
-//                                        modelStores.clear();
                                         modelStores.add(dataStore);
                                         recyclerViewStore.setAdapter(recyclerViewStoreAdapter);
                                         recyclerViewStoreAdapter.notifyDataSetChanged();

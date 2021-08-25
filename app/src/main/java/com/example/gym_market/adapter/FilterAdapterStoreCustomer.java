@@ -115,7 +115,6 @@ public class FilterAdapterStoreCustomer extends RecyclerView.Adapter<FilterAdapt
         CardView cardBarang;
         String textDeskripsi;
         LinearLayout editData, deleteData;
-        String idData;
 
         public ViewHolder(View itemView) {
             super(itemView);

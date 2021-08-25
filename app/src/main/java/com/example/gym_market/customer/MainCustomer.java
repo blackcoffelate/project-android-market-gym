@@ -68,7 +68,6 @@ public class MainCustomer extends AppCompatActivity {
                         break;
                     case R.id.pesanan:
                         startActivity(new Intent(MainCustomer.this, PesananCustomer.class));
-//                        Animatoo.animateSlideLeft(MainCustomer.this);
                         break;
                     case R.id.daftarpesanan:
                         loadFragment(new FragmentDaftarPesanan());

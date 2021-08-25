@@ -1,8 +1,6 @@
 package com.example.gym_market.customer;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -10,8 +8,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,8 +21,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gym_market.R;
-import com.example.gym_market.adapter.AdapterDashboard;
-import com.example.gym_market.adapter.AdapterStoreCustomer;
 import com.example.gym_market.adapter.FilterAdapterStoreCustomer;
 import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.server.BaseURL;
@@ -41,7 +35,6 @@ import java.util.List;
 public class AllDataStoreCustomer extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerViewAllDataStore;
-//    RecyclerView.Adapter recyclerViewAllDataStoreAdapter;
     List<ModelStore> modelStores;
     FilterAdapterStoreCustomer recyclerViewAllDataStoreAdapterFilter;
 

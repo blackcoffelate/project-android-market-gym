@@ -1,6 +1,5 @@
 package com.example.gym_market.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -26,7 +24,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gym_market.DetailData;
 import com.example.gym_market.R;
-import com.example.gym_market.admin.FragmentStore;
 import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.server.BaseURL;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;

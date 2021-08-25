@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,7 +19,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gym_market.R;
 import com.example.gym_market.adapter.AdapterDashboard;
-import com.example.gym_market.adapter.AdapterStore;
 import com.example.gym_market.model.ModelStore;
 import com.example.gym_market.server.BaseURL;
 
@@ -60,8 +58,6 @@ public class AllDataStore extends AppCompatActivity implements SwipeRefreshLayou
         modelStores = new ArrayList<>();
         recyclerViewAllDataStoreAdapter = new AdapterDashboard(this, modelStores);
 
-//        functionCheckStore();
-
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +75,6 @@ public class AllDataStore extends AppCompatActivity implements SwipeRefreshLayou
                 functionCheckStore();
             }
         });
-
     }
 
     private void functionCheckStore() {

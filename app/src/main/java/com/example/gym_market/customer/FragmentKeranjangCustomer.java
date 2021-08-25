@@ -8,18 +8,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +30,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.gym_market.R;
 import com.example.gym_market.adapter.AdapterKeranjangCustomer;
 import com.example.gym_market.model.ModelKeranjang;
@@ -61,7 +56,6 @@ public class FragmentKeranjangCustomer extends Fragment implements SwipeRefreshL
     RecyclerView recyclerViewAllDataKeranjang;
     RecyclerView.Adapter recyclerViewAllDataKeranjangAdapter;
     List<ModelKeranjang> modelKeranjang;
-    List<ModelListDataBelanja> listDataBelanja = new ArrayList<>();
 
     private RequestQueue mRequestQueue;
     ModelUser modelUser;

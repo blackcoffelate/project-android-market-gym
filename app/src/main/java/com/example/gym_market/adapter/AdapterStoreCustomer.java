@@ -82,7 +82,6 @@ public class AdapterStoreCustomer extends RecyclerView.Adapter<AdapterStoreCusto
         CardView cardBarang;
         String textDeskripsi;
         LinearLayout editData, deleteData;
-        String idData;
 
         public ViewHolder(View itemView) {
             super(itemView);
