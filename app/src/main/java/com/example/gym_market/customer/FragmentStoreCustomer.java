@@ -41,7 +41,6 @@ public class FragmentStoreCustomer extends Fragment implements SwipeRefreshLayou
     private RequestQueue mRequestQueue;
 
     private LinearLayout animationView;
-    private ImageView backArrow;
     private SwipeRefreshLayout swipeRefreshLayoutStore;
 
     @Override

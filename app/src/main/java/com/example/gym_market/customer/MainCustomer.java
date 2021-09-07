@@ -60,9 +60,9 @@ public class MainCustomer extends AppCompatActivity {
                     case R.id.dashboard:
                         loadFragment(new FragmentDashboardCustomer());
                         break;
-                    case R.id.store:
-                        loadFragment(new FragmentStoreCustomer());
-                        break;
+//                    case R.id.store:
+//                        loadFragment(new FragmentStoreCustomer());
+//                        break;
                     case R.id.keranjang:
                         loadFragment(new FragmentKeranjangCustomer());
                         break;

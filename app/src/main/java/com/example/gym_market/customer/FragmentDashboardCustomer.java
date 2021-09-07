@@ -60,6 +60,8 @@ public class FragmentDashboardCustomer extends Fragment {
 
         mRequestQueue = Volley.newRequestQueue(getActivity());
 
+        String isiportal = "";
+
         greetingDay = v.findViewById(R.id.greeting);
         greetingImg = v.findViewById(R.id.greeting_img);
         greetingIcon = v.findViewById(R.id.greeting_icon);

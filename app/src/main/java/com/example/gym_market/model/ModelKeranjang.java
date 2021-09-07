@@ -2,20 +2,38 @@ package com.example.gym_market.model;
 
 public class ModelKeranjang {
 
-    String idBarang, namaBarang, hargaBrang, qty, deskripsiBarang;
+    String idKeranjang, idBarang, namaBarang, hargaBarang, qty, stokBarang, deskripsiBarang;
     private boolean isSelected;
 
     public ModelKeranjang(){
 
     }
 
-    public ModelKeranjang(String idBarang, String namaBarang, String hargaBrang, String qty, String deskripsiBarang, boolean isSelected){
+    public ModelKeranjang(String idKeranjang, String idBarang, String namaBarang, String hargaBarang, String stokBarang, String qty, String deskripsiBarang, boolean isSelected){
+        this.idKeranjang = idKeranjang;
         this.idBarang = idBarang;
         this.namaBarang = namaBarang;
-        this.hargaBrang = hargaBrang;
+        this.hargaBarang = hargaBarang;
         this.qty = qty;
+        this.stokBarang = stokBarang;
         this.deskripsiBarang = deskripsiBarang;
         this.isSelected = isSelected;
+    }
+
+    public String getStokBarang() {
+        return stokBarang;
+    }
+
+    public void setStokBarang(String stokBarang) {
+        this.stokBarang = stokBarang;
+    }
+
+    public String getIdKeranjang() {
+        return idKeranjang;
+    }
+
+    public void setIdKeranjang(String idKeranjang) {
+        this.idKeranjang = idKeranjang;
     }
 
     public String getIdBarang() {
@@ -35,11 +53,11 @@ public class ModelKeranjang {
     }
 
     public String getHargaBrang() {
-        return hargaBrang;
+        return hargaBarang;
     }
 
     public void setHargaBrang(String hargaBrang) {
-        this.hargaBrang = hargaBrang;
+        this.hargaBarang = hargaBrang;
     }
 
     public String getQty() {

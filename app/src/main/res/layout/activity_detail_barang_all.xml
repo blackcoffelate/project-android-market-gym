@@ -178,7 +178,7 @@
                                     android:layout_weight="0"
                                     app:backGroundColor="@color/green"
                                     app:textColor="@color/white"
-                                    app:textSize="8sp" />
+                                    app:textSize="6sp" />
 
                             </LinearLayout>
 

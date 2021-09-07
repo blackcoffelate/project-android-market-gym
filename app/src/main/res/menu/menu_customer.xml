@@ -8,11 +8,11 @@
                     android:icon="@drawable/ic_dashboard_black_24dp"
                     android:iconTint="@color/white"
                     android:title="Dashboard" />
-                <item
-                    android:id="@+id/store"
-                    android:icon="@drawable/ic_store_mall_directory_black_24dp"
-                    android:iconTint="@color/white"
-                    android:title="Produk" />
+<!--                <item-->
+<!--                    android:id="@+id/store"-->
+<!--                    android:icon="@drawable/ic_store_mall_directory_black_24dp"-->
+<!--                    android:iconTint="@color/white"-->
+<!--                    android:title="Produk" />-->
                 <item
                     android:id="@+id/keranjang"
                     android:icon="@drawable/ic_shopping_basket_black_24dp"

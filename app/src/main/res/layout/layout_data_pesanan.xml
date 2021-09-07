@@ -19,24 +19,6 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:padding="10dp">
-
-                <CheckBox
-                    android:id="@+id/checkbox_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox_style"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleX="1"
-                    android:scaleY="1" />
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -50,7 +32,7 @@
                     android:weightSum="2">
 
                     <TextView
-                        android:id="@+id/nama_barang"
+                        android:id="@+id/nama_barang_pesanan"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -60,30 +42,12 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="60dp"
-                        android:layout_height="35dp"
-                        android:layout_weight="0"
-                        android:background="@drawable/button_yellow"
-                        android:gravity="end"
-                        android:orientation="horizontal"
-                        android:paddingBottom="2dp">
-
-                        <ImageButton
-                            android:id="@+id/delete_item"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_delete_sweep_black_24dp"
-                            android:tint="@color/white" />
-
-                    </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal">
 
@@ -107,7 +71,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/qty_barang"
+                            android:id="@+id/qty_barang_pesanan"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:gravity="center"
@@ -135,7 +99,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/harga_barang"
+                            android:id="@+id/harga_barang_pesanan"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginStart="5dp"
@@ -147,27 +111,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#FDF8F8" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Deskripsi Barang"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/deskripsi_barang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lorem_desc"
-                    android:textSize="12sp" />
 
             </LinearLayout>
 

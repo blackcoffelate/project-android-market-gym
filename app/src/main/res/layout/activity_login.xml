@@ -37,7 +37,8 @@
             android:gravity="center"
             android:text="@string/instansi"
             android:textAllCaps="true"
-            android:textColor="@color/blue"
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
             android:textSize="20sp"
             android:textStyle="bold" />
 

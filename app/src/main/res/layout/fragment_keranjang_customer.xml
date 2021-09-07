@@ -64,60 +64,65 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="3.5"
         android:orientation="vertical">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_data_keranjang"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/data_all_keranjang"
+            <LinearLayout
+                android:id="@+id/empty_all_data_keranjang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:visibility="gone"
-                tools:itemCount="2"
-                tools:listitem="@layout/layout_data_keranjang" />
+                android:orientation="vertical">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center|top"
+                    android:padding="25dp"
+                    android:visibility="visible"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/empty_data" />
 
-        <LinearLayout
-            android:id="@+id/empty_all_data_keranjang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/pesanan_kosong"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-            <com.airbnb.lottie.LottieAnimationView
+            </LinearLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh_data_keranjang"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|top"
-                android:padding="25dp"
-                android:visibility="visible"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/empty_data" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Tidak ada produk terdaftar"
-                android:textAlignment="center"
-                android:textColor="@color/blue"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/data_all_keranjang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/layout_data_keranjang" />
 
-        </LinearLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -177,9 +182,9 @@
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:text="IDR"
-                            android:textStyle="bold"
                             android:textColor="@color/blue"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/val"
@@ -188,9 +193,9 @@
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:text="0"
-                            android:textStyle="bold"
                             android:textColor="@color/blue"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -199,18 +204,18 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="end|center_vertical"
                     android:layout_marginStart="15dp"
+                    android:gravity="end|center_vertical"
                     android:paddingBottom="2dp">
 
                     <Button
                         android:id="@+id/checkout_item"
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
+                        android:background="@drawable/button_yellow"
                         android:paddingLeft="10dp"
                         android:paddingTop="2dp"
                         android:paddingRight="10dp"
-                        android:background="@drawable/button_yellow"
                         android:text="CHECKOUT"
                         android:textStyle="bold"
                         android:tint="@color/white" />

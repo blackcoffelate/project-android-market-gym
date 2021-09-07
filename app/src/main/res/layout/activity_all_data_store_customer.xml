@@ -15,7 +15,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -50,31 +49,37 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_all_data_customer"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/data_all_data_customer"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh_all_data_customer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:visibility="gone"
-                tools:itemCount="2"
-                tools:listitem="@layout/layout_data_admin" />
+                android:layout_height="wrap_content">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/data_all_data_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/layout_data_admin" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/empty_all_data_customer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <com.airbnb.lottie.LottieAnimationView
@@ -92,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Tidak ada produk terdaftar"
+                android:text="@string/barang_kosong"
                 android:textAlignment="center"
                 android:textColor="@color/blue"
                 android:textSize="15sp"
@@ -100,6 +105,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

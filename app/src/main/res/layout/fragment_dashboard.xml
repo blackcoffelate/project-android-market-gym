@@ -353,41 +353,47 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/empty_dashboard"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:visibility="visible"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/empty_data" />
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/empty_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="Tidak ada produk terdaftar"
-            android:textAlignment="center"
-            android:textColor="@color/blue"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/empty_data" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/data_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
-        android:visibility="gone"
-        tools:itemCount="2"
-        tools:listitem="@layout/layout_data_admin" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/barang_kosong"
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/data_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:visibility="gone"
+            tools:itemCount="2"
+            tools:listitem="@layout/layout_data_admin" />
+
+    </FrameLayout>
 
 </LinearLayout>

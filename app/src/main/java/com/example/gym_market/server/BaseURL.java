@@ -1,8 +1,9 @@
 package com.example.gym_market.server;
 
-public class BaseURL {
+public class BaseURL{
 
-    public static String baseUrl = "http://192.168.18.5:5050/";
+//    public static String baseUrl = "http://192.168.18.5:5050/";
+    public static String baseUrl = "http://studio81.co.id:5055/";
 
     public static String login = baseUrl + "users/signin";
     public static String register = baseUrl + "users/signup";
@@ -16,6 +17,11 @@ public class BaseURL {
     public static String add_cart = baseUrl + "transaksi/addkeranjang";
     public static String get_cart = baseUrl + "transaksi/getkeranjang/";
     public static String delete_cart = baseUrl + "transaksi/keranjang/";
+
+    public static String get_pesanan = baseUrl + "transaksi/gettransaksi/";
+
+    public static String transfer = baseUrl + "transaksi/pembayaran/";
+    public static String log = baseUrl + "transaksi/getalltransaksi/";
 
     public static String checkout = baseUrl + "transaksi/checkout";
 
