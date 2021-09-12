@@ -173,7 +173,6 @@ public class FragmentKeranjangCustomer extends Fragment implements SwipeRefreshL
             }
         });
         mRequestQueue.add(req);
-
     }
 
     private void gotoPesanan() {
